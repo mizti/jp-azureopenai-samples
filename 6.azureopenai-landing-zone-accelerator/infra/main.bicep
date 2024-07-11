@@ -34,6 +34,7 @@ param aoaiCapacity int = 10
 param openAiSkuName string = 'S0'
 param openAiGpt35TurboDeploymentName string = 'gpt-35-turbo-deploy'
 param openAiGpt35Turbo16kDeploymentName string = 'gpt-35-turbo-16k-deploy'
+param openAiGpt4oDeploymentName string = 'gpt-4o-deploy'
 
 // params for api policy settings
 @description('CORSオリジンとして許可するドメインを指定してください(*でも可)')
@@ -94,6 +95,18 @@ module openAi 'core/ai/cognitiveservices.bicep' = {
         }
         sku: {
           name: 'Standard'
+          capacity: 120
+        }
+      }
+      {
+        name: openAiGpt4oDeploymentName
+        model: {
+          format: 'OpenAI'
+          name: 'gpt-4o'
+          version: '2024-05-13'
+        }
+        sku: {
+          name: 'GlobalStandard'
           capacity: 120
         }
       }
